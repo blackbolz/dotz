@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOTZ - Welcome to the Pixel World</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ee82ee, #9370db, #00fa9a, #ff1493);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 200vh;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Page 1 - Main Character Section */
+        .main-page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            width: 100%;
+        }
+        
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .title {
+            font-size: 4rem;
+            text-shadow: 4px 4px 0px #000, 8px 8px 0px #333;
+            color: #00ff41;
+            margin-bottom: 20px;
+            image-rendering: pixelated;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .button-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .ca-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .ca-text {
+            font-size: 14px;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000;
+        }
+        
+        .pixel-button {
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            border: 4px solid #fff;
+            color: #000;
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            cursor: pointer;
+            position: relative;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 4px 4px 0px #000, 8px 8px 0px #333;
+            image-rendering: pixelated;
+            z-index: 10;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .pixel-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000, 10px 10px 0px #333;
+        }
+        
+        .pixel-button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000, 4px 4px 0px #333;
+        }
+        
+        .pixel-button.secondary {
+            background: linear-gradient(45deg, #ff6b35, #ff4500);
+        }
+        
+        .pixel-button.tertiary {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+        
+        .pixel-button.quaternary {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        
+        .pixel-button.copy {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            padding: 10px 20px;
+            font-size: 12px;
+            min-width: 80px;
+        }
+        
+        .character-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .character-image {
+            width: 500px;
+            height: 500px;
+            background: url('images/dotz.png') center center / contain no-repeat;
+            image-rendering: pixelated;
+            filter: drop-shadow(8px 8px 0px #000) drop-shadow(12px 12px 0px #333);
+            animation: float 3s ease-in-out infinite;
+            z-index: 5;
+            position: relative;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Page 2 - Album Section */
+        .album-page {
+            min-height: 100vh;
+            padding: 80px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .album-title {
+            font-size: 3rem;
+            text-shadow: 4px 4px 0px #000, 8px 8px 0px #333;
+            color: #ff6b35;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .album-container {
+            width: 100%;
+            padding: 0 40px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 1600px;
+        }
+        
+        .album-item {
+            width: 100%;
+            aspect-ratio: 1;
+            min-width: 180px;
+            min-height: 180px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 15px;
+            box-shadow: 
+                0 0 0 3px #fff,
+                0 0 0 6px #000,
+                inset 0 0 20px rgba(0,0,0,0.3),
+                8px 8px 15px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            image-rendering: pixelated;
+            overflow: hidden;
+            z-index: 5;
+        }
+        
+        .album-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 0 0 3px #00ff41,
+                0 0 0 6px #000,
+                inset 0 0 20px rgba(0,0,0,0.3),
+                8px 15px 20px rgba(0,0,0,0.6);
+        }
+        
+        .album-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            image-rendering: pixelated;
+            z-index: 6;
+            position: relative;
+        }
+        
+        .placeholder-text {
+            color: #7f8c8d;
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.8;
+            image-rendering: pixelated;
+            text-shadow: 
+                1px 0px 0px #000,
+                -1px 0px 0px #000,
+                0px 1px 0px #000,
+                0px -1px 0px #000,
+                1px 1px 0px #000;
+            filter: contrast(1.1);
+        }
+        
+        /* Animated pixelated dots background */
+        .pixel-dot {
+            position: fixed;
+            border-radius: 50%;
+            animation: rotateDot 4s linear infinite;
+            z-index: 1;
+            image-rendering: pixelated;
+        }
+        
+        .pixel-dot:nth-child(1) {
+            width: 16px;
+            height: 16px;
+            background: #00ff41;
+            top: 15%;
+            left: 10%;
+            animation-duration: 3s;
+        }
+        
+        .pixel-dot:nth-child(2) {
+            width: 12px;
+            height: 12px;
+            background: #ff6b35;
+            top: 25%;
+            right: 15%;
+            animation-duration: 4s;
+            animation-direction: reverse;
+        }
+        
+        .pixel-dot:nth-child(3) {
+            width: 20px;
+            height: 20px;
+            background: #9b59b6;
+            top: 45%;
+            left: 5%;
+            animation-duration: 5s;
+        }
+        
+        .pixel-dot:nth-child(4) {
+            width: 14px;
+            height: 14px;
+            background: #3498db;
+            top: 35%;
+            right: 8%;
+            animation-duration: 3.5s;
+        }
+        
+        .pixel-dot:nth-child(5) {
+            width: 18px;
+            height: 18px;
+            background: #e74c3c;
+            top: 65%;
+            left: 20%;
+            animation-duration: 4.5s;
+            animation-direction: reverse;
+        }
+        
+        .pixel-dot:nth-child(6) {
+            width: 13px;
+            height: 13px;
+            background: #f1c40f;
+            top: 75%;
+            right: 25%;
+            animation-duration: 6s;
+        }
+        
+        .pixel-dot:nth-child(7) {
+            width: 17px;
+            height: 17px;
+            background: #1abc9c;
+            top: 85%;
+            left: 15%;
+            animation-duration: 3.8s;
+        }
+        
+        .pixel-dot:nth-child(8) {
+            width: 15px;
+            height: 15px;
+            background: #e67e22;
+            top: 55%;
+            left: 80%;
+            animation-duration: 4.2s;
+            animation-direction: reverse;
+        }
+        
+        .pixel-dot:nth-child(9) {
+            width: 22px;
+            height: 22px;
+            background: #8e44ad;
+            top: 90%;
+            right: 10%;
+            animation-duration: 5.5s;
+        }
+        
+        .pixel-dot:nth-child(10) {
+            width: 11px;
+            height: 11px;
+            background: #2ecc71;
+            top: 30%;
+            left: 50%;
+            animation-duration: 3.2s;
+        }
+        
+        .pixel-dot:nth-child(11) {
+            width: 16px;
+            height: 16px;
+            background: #ff1744;
+            top: 70%;
+            right: 40%;
+            animation-duration: 4.8s;
+            animation-direction: reverse;
+        }
+        
+        .pixel-dot:nth-child(12) {
+            width: 14px;
+            height: 14px;
+            background: #00bcd4;
+            top: 120%;
+            left: 25%;
+            animation-duration: 3.7s;
+        }
+        
+        .pixel-dot:nth-child(13) {
+            width: 19px;
+            height: 19px;
+            background: #ffeb3b;
+            top: 135%;
+            right: 20%;
+            animation-duration: 5.2s;
+            animation-direction: reverse;
+        }
+        
+        .pixel-dot:nth-child(14) {
+            width: 12px;
+            height: 12px;
+            background: #795548;
+            top: 150%;
+            left: 10%;
+            animation-duration: 4.1s;
+        }
+        
+        .pixel-dot:nth-child(15) {
+            width: 21px;
+            height: 21px;
+            background: #607d8b;
+            top: 165%;
+            right: 30%;
+            animation-duration: 6.3s;
+        }
+        
+        .pixel-dot:nth-child(16) {
+            width: 13px;
+            height: 13px;
+            background: #4caf50;
+            top: 180%;
+            left: 40%;
+            animation-duration: 3.9s;
+            animation-direction: reverse;
+        }
+        
+        .pixel-dot:nth-child(17) {
+            width: 17px;
+            height: 17px;
+            background: #ff5722;
+            top: 40%;
+            left: 30%;
+            animation-duration: 4.7s;
+        }
+        
+        .pixel-dot:nth-child(18) {
+            width: 15px;
+            height: 15px;
+            background: #673ab7;
+            top: 60%;
+            right: 60%;
+            animation-duration: 5.1s;
+            animation-direction: reverse;
+        }
+        
+        .pixel-dot:nth-child(19) {
+            width: 18px;
+            height: 18px;
+            background: #009688;
+            top: 110%;
+            left: 60%;
+            animation-duration: 4.4s;
+        }
+        
+        .pixel-dot:nth-child(20) {
+            width: 14px;
+            height: 14px;
+            background: #ffc107;
+            top: 125%;
+            right: 45%;
+            animation-duration: 3.6s;
+            animation-direction: reverse;
+        }
+        
+        @keyframes rotateDot {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.3); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(0.7); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .album-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+            }
+            
+            .album-item {
+                min-width: 150px;
+                min-height: 150px;
+            }
+            
+            .character-image {
+                width: 400px;
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .character-image {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .album-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+            }
+            
+            .album-item {
+                min-width: 120px;
+                min-height: 120px;
+            }
+            
+            .album-title {
+                font-size: 2rem;
+            }
+            
+            .placeholder-text {
+                font-size: 10px;
+            }
+            
+            .button-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .ca-section {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .album-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .album-container {
+                padding: 0 20px;
+            }
+            
+            .album-item {
+                min-width: 140px;
+                min-height: 140px;
+            }
+            
+            .character-image {
+                width: 300px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated pixelated dots -->
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    <div class="pixel-dot"></div>
+    
+    <!-- Page 1: Main Character -->
+    <div class="main-page">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="left-section">
+                    <h1 class="title">DOTZ</h1>
+                    <div class="button-container">
+                        <a href="https://pump.fun/board" target="_blank" class="pixel-button">BUY $DOTZ</a>
+                        <a href="https://x.com/acount1" target="_blank" class="pixel-button secondary">X</a>
+                        <div class="button-row">
+                            <a href="https://dexscreener.com" target="_blank" class="pixel-button tertiary">Dexscreener</a>
+                            <a href="https://x.com/community" target="_blank" class="pixel-button quaternary">Community</a>
+                        </div>
+                        <div class="ca-section">
+                            <span class="ca-text">CA: Coming Soon</span>
+                            <button class="pixel-button copy" onclick="copyToClipboard('Coming Soon')">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="character-section">
+                    <div class="character-image"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 2: Album -->
+    <div class="album-page">
+        <h2 class="album-title">DOTZ MEMES</h2>
+        <div class="album-container">
+            <div class="album-grid">
+                <!-- 25 items arranged in flexible grid -->
+                <div class="album-item">
+                    <img src="images/1.png" alt="Meme 1" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>01</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/2.png" alt="Meme 2" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>02</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/3.png" alt="Meme 3" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>03</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/4.png" alt="Meme 4" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>04</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/5.png" alt="Meme 5" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>05</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/6.png" alt="Meme 6" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>06</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/7.png" alt="Meme 7" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>07</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/8.png" alt="Meme 8" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>08</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/9.png" alt="Meme 9" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>09</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/10.png" alt="Meme 10" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>10</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/11.png" alt="Meme 11" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>11</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/12.png" alt="Meme 12" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>12</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/13.png" alt="Meme 13" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>13</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/14.png" alt="Meme 14" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>14</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/15.png" alt="Meme 15" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>15</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/16.png" alt="Meme 16" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>16</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/17.png" alt="Meme 17" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>17</div>
+                </div>
+                <div class="album-item">
+                    <img src="images/18.png" alt="Meme 18" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                    <div class="placeholder-text">MEME<br>18</div>
+                </div>
+                <div class="album-item">
+                    <div class="placeholder-text">MEME<br>19</div>
+                </div>
+                <div class="album-item">
+                    <div class="placeholder-text">MEME<br>20</div>
+                </div>
+                <div class="album-item">
+                    <div class="placeholder-text">MEME<br>21</div>
+                </div>
+                <div class="album-item">
+                    <div class="placeholder-text">MEME<br>22</div>
+                </div>
+                <div class="album-item">
+                    <div class="placeholder-text">MEME<br>23</div>
+                </div>
+                <div class="album-item">
+                    <div class="placeholder-text">MEME<br>24</div>
+                </div>
+                <div class="album-item">
+                    <div class="placeholder-text">MEME<br>25</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                // Visual feedback for successful copy
+                const copyBtn = event.target;
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                copyBtn.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+                
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = 'linear-gradient(45deg, #e74c3c, #c0392b)';
+                }, 1500);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+        
+        // Add click animation for buttons
+        document.querySelectorAll('.pixel-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Don't add animation if it's a copy button (has its own feedback)
+                if (!this.classList.contains('copy')) {
+                    this.style.transform = 'translate(2px, 2px)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
