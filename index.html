@@ -31,6 +31,167 @@
             100% { background-position: 0% 50%; }
         }
         
+        /* LORE Button Styles */
+        .lore-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #ff1744, #d50000);
+            border: 4px solid #fff;
+            color: #000;
+            padding: 12px 24px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 4px 4px 0px #000, 8px 8px 0px #333;
+            z-index: 1000;
+            image-rendering: pixelated;
+        }
+        
+        .lore-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000, 10px 10px 0px #333;
+        }
+        
+        .lore-button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000, 4px 4px 0px #333;
+        }
+        
+        /* Popup Modal Styles */
+        .lore-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .lore-modal.show {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .lore-content {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border: 6px solid #fff;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 
+                0 0 0 3px #000,
+                inset 0 0 20px rgba(0,0,0,0.3),
+                0 20px 40px rgba(0,0,0,0.8);
+            animation: slideIn 0.4s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: scale(0.7) translateY(-50px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        
+        .lore-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border: 3px solid #fff;
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 2px 2px 0px #000;
+        }
+        
+        .lore-close:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px #000;
+        }
+        
+        .lore-title {
+            font-size: 24px;
+            color: #00ff41;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 0px #000;
+        }
+        
+        .lore-text {
+            line-height: 1.8;
+            color: #fff;
+            font-size: 11px;
+            text-shadow: 1px 1px 0px #000;
+        }
+        
+        .lore-text h3 {
+            color: #ff6b35;
+            margin: 25px 0 15px 0;
+            font-size: 14px;
+            text-shadow: 2px 2px 0px #000;
+        }
+        
+        .lore-text h3:first-of-type {
+            margin-top: 0;
+        }
+        
+        .lore-text p {
+            margin-bottom: 15px;
+        }
+        
+        .lore-text .signature {
+            color: #00ff41;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            text-shadow: 2px 2px 0px #000;
+        }
+        
+        /* Responsive for lore modal */
+        @media (max-width: 768px) {
+            .lore-content {
+                padding: 25px;
+                margin: 10px;
+                max-width: calc(100vw - 20px);
+            }
+            
+            .lore-title {
+                font-size: 18px;
+            }
+            
+            .lore-text {
+                font-size: 10px;
+            }
+            
+            .lore-text h3 {
+                font-size: 12px;
+            }
+            
+            .lore-button {
+                top: 15px;
+                right: 15px;
+                padding: 10px 20px;
+                font-size: 10px;
+            }
+        }
+        
         .container {
             width: 100%;
             max-width: 1200px;
@@ -568,6 +729,45 @@
     </style>
 </head>
 <body>
+    <!-- LORE Button -->
+    <button class="lore-button" onclick="openLoreModal()">LORE</button>
+    
+    <!-- LORE Modal -->
+    <div class="lore-modal" id="loreModal" onclick="closeLoreModal(event)">
+        <div class="lore-content" onclick="event.stopPropagation()">
+            <button class="lore-close" onclick="closeLoreModal()">X</button>
+            <div class="lore-title">THE DOTZ LORE</div>
+            <div class="lore-text">
+                <h3>The First Dot</h3>
+                <p>In the beginning, there was nothing—an endless blank expanse. Silence without shape. Emptiness without end. Then, without warning, a single dot appeared. Small, simple, insignificant. Yet in that speck was possibility itself.</p>
+                
+                <h3>The Birth of Many</h3>
+                <p>The First Dot was not alone for long. It split, then multiplied. Two became four. Four became eight. Soon the blank void was no longer empty—thousands of tiny sparks, each a dot, spreading like stars across the canvas of creation. What was once a nothing became a pattern. What was once meaningless became a swarm.</p>
+                
+                <h3>The Realm of Connection</h3>
+                <p>The dots did not drift without purpose. When they touched, they connected, forming lines, webs, constellations. Together, they created meaning from nothing. Roads between worlds, maps of the unseen, and constellations that guided lost travelers. To be a dot was to be small; to be DOTZ was to be endless.</p>
+                
+                <h3>The Threat of Erasure</h3>
+                <p>But not all forces welcomed the swarm. From the shadows of emptiness emerged The Erasers—beings who despise pattern and seek to return everything to void. With each swipe, entire constellations vanish. Without resistance, every dot would be rubbed away, leaving only nothingness behind.</p>
+                
+                <h3>The Multiplying Rebellion</h3>
+                <p>Yet DOTZ do not fear. Their strength is not in the single speck, but in the collective. When one is erased, ten more emerge. When a constellation is broken, another rises elsewhere. No hand can silence the swarm, for their nature is to multiply, to persist, to fill every void.</p>
+                
+                <h3>The March of DOTZ</h3>
+                <p>Now, the blank canvas trembles beneath the endless spread of the swarm. They do not conquer with swords, nor rule with crowns. They conquer by existing, multiplying, covering every inch of the void with their stubborn, simple presence. A million specks. A billion stars. A trillion points of unstoppable growth.</p>
+                
+                <p>And at the center of it all stands the First Dot, silent yet smiling. For it knows: one was enough.</p>
+                
+                <p>Because in the end, nothing can stop the swarm.</p>
+                
+                <div class="signature">
+                    <p>We are $DOTZ.</p>
+                    <p>We multiply.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Animated pixelated dots -->
     <div class="pixel-dot"></div>
     <div class="pixel-dot"></div>
@@ -695,9 +895,11 @@
                     <div class="placeholder-text">MEME<br>18</div>
                 </div>
                 <div class="album-item">
+                    <img src="images/19.png" alt="Meme 19" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
                     <div class="placeholder-text">MEME<br>19</div>
                 </div>
                 <div class="album-item">
+                    <img src="images/20.png" alt="Meme 20" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
                     <div class="placeholder-text">MEME<br>20</div>
                 </div>
                 <div class="album-item">
@@ -720,6 +922,29 @@
     </div>
     
     <script>
+        // LORE Modal Functions
+        function openLoreModal() {
+            const modal = document.getElementById('loreModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+        
+        function closeLoreModal(event) {
+            // Only close if clicking the modal background or close button
+            if (!event || event.target.id === 'loreModal' || event.target.classList.contains('lore-close')) {
+                const modal = document.getElementById('loreModal');
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLoreModal();
+            }
+        });
+        
         // Copy to clipboard function
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
