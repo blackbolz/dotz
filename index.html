@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOTZ</title>
+    <title>SPEN</title>
     <link rel="icon" type="image/png" href="images/dotz.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -12,6 +12,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -30,34 +34,89 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
-        /* LORE Button Styles */
-        .lore-button {
+
+        /* Top Navigation Area */
+        .top-nav {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, #ff1744, #d50000);
-            border: 4px solid #fff;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #00ff41;
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            border: 3px solid #fff;
             color: #000;
-            padding: 12px 24px;
+            padding: 8px 16px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 12px;
+            font-size: 10px;
             cursor: pointer;
             text-transform: uppercase;
             transition: all 0.2s;
-            box-shadow: 4px 4px 0px #000, 8px 8px 0px #333;
-            z-index: 1000;
+            box-shadow: 2px 2px 0px #000;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        .nav-button:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px #000;
+        }
+
+        .nav-button.tokenomics {
+            background: linear-gradient(45deg, #ff6b35, #ff4500);
+        }
+
+        .nav-button.howto {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+
+        .nav-button.gallery {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        
+        /* LORE Button Styles */
+        .lore-button {
+            background: linear-gradient(45deg, #ff1744, #d50000);
+            border: 3px solid #fff;
+            color: #000;
+            padding: 8px 16px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 2px 2px 0px #000;
             image-rendering: pixelated;
         }
         
         .lore-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #000, 10px 10px 0px #333;
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px #000;
         }
         
         .lore-button:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #000, 4px 4px 0px #333;
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px #000;
         }
         
         /* Popup Modal Styles */
@@ -164,39 +223,29 @@
             text-shadow: 2px 2px 0px #000;
         }
         
-        /* Responsive for lore modal */
-        @media (max-width: 768px) {
-            .lore-content {
-                padding: 25px;
-                margin: 10px;
-                max-width: calc(100vw - 20px);
-            }
-            
-            .lore-title {
-                font-size: 18px;
-            }
-            
-            .lore-text {
-                font-size: 10px;
-            }
-            
-            .lore-text h3 {
-                font-size: 12px;
-            }
-            
-            .lore-button {
-                top: 15px;
-                right: 15px;
-                padding: 10px 20px;
-                font-size: 10px;
-            }
-        }
-        
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Section styling */
+        .section {
+            min-height: 100vh;
+            padding: 120px 0 80px 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-shadow: 4px 4px 0px #000, 8px 8px 0px #333;
+            color: #ff6b35;
+            margin-bottom: 60px;
+            text-align: center;
         }
         
         /* Page 1 - Main Character Section */
@@ -207,6 +256,7 @@
             justify-content: center;
             position: relative;
             z-index: 10;
+            padding-top: 80px;
         }
         
         .content-wrapper {
@@ -336,24 +386,153 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
-        
-        /* Page 2 - Album Section */
-        .album-page {
+
+        /* Tokenomics Section */
+        .tokenomics-section {
+            padding: 120px 0 80px 0;
             min-height: 100vh;
-            padding: 80px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .tokenomics-content {
+            width: 100%;
+            text-align: center;
+        }
+
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .tokenomics-card {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border: 4px solid #fff;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 0 0 3px #000,
+                inset 0 0 20px rgba(0,0,0,0.3),
+                8px 8px 15px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .tokenomics-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 0 0 3px #00ff41,
+                0 0 0 6px #000,
+                inset 0 0 20px rgba(0,0,0,0.3),
+                8px 15px 20px rgba(0,0,0,0.6);
+        }
+
+        .tokenomics-card h3 {
+            font-size: 18px;
+            color: #00ff41;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .tokenomics-card .value {
+            font-size: 24px;
+            color: #ff6b35;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .tokenomics-card .description {
+            font-size: 11px;
+            color: #bdc3c7;
+            line-height: 1.6;
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        /* How to Buy Section */
+        .howto-section {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .howto-content {
+            width: 100%;
+            text-align: center;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border: 4px solid #fff;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 0 0 3px #000,
+                inset 0 0 20px rgba(0,0,0,0.3),
+                8px 8px 15px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 0 0 3px #9b59b6,
+                0 0 0 6px #000,
+                inset 0 0 20px rgba(0,0,0,0.3),
+                8px 15px 20px rgba(0,0,0,0.6);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            border: 3px solid #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #000;
+            font-weight: bold;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .step-card h3 {
+            font-size: 16px;
+            color: #9b59b6;
+            margin: 25px 0 20px 0;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .step-card p {
+            font-size: 11px;
+            color: #bdc3c7;
+            line-height: 1.6;
+            text-shadow: 1px 1px 0px #000;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            min-height: 100vh;
+            padding: 120px 0 80px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             z-index: 10;
-        }
-        
-        .album-title {
-            font-size: 3rem;
-            text-shadow: 4px 4px 0px #000, 8px 8px 0px #333;
-            color: #ff6b35;
-            margin-bottom: 60px;
-            text-align: center;
         }
         
         .album-container {
@@ -654,6 +833,12 @@
                 width: 400px;
                 height: 400px;
             }
+
+            .tokenomics-grid,
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -665,6 +850,10 @@
             
             .title {
                 font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
             }
             
             .character-image {
@@ -682,10 +871,6 @@
                 min-height: 120px;
             }
             
-            .album-title {
-                font-size: 2rem;
-            }
-            
             .placeholder-text {
                 font-size: 10px;
             }
@@ -699,6 +884,46 @@
                 flex-direction: column;
                 gap: 10px;
                 align-items: stretch;
+            }
+
+            .nav-container {
+                gap: 20px;
+            }
+
+            .nav-button {
+                padding: 10px 16px;
+                font-size: 10px;
+            }
+
+            .tokenomics-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .lore-content {
+                padding: 25px;
+                margin: 10px;
+                max-width: calc(100vw - 20px);
+            }
+            
+            .lore-title {
+                font-size: 18px;
+            }
+            
+            .lore-text {
+                font-size: 10px;
+            }
+            
+            .lore-text h3 {
+                font-size: 12px;
+            }
+            
+            .lore-button {
+                top: 15px;
+                right: 15px;
+                padding: 10px 20px;
+                font-size: 10px;
             }
         }
         
@@ -725,44 +950,82 @@
                 width: 300px;
                 height: 300px;
             }
+
+            .nav-container {
+                gap: 8px;
+            }
+
+            .nav-button,
+            .lore-button {
+                padding: 5px 10px;
+                font-size: 7px;
+            }
+
+            .tokenomics-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .lore-content {
+                padding: 25px;
+                margin: 10px;
+                max-width: calc(100vw - 20px);
+            }
+            
+            .lore-title {
+                font-size: 18px;
+            }
+            
+            .lore-text {
+                font-size: 10px;
+            }
+            
+            .lore-text h3 {
+                font-size: 12px;
+            }
         }
+        
     </style>
 </head>
 <body>
-    <!-- LORE Button -->
-    <button class="lore-button" onclick="openLoreModal()">LORE</button>
+    <!-- Top Navigation Area -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="#tokenomics" class="nav-button tokenomics">Tokenomics</a>
+            <a href="#howto" class="nav-button howto">How to Buy</a>
+            <a href="#gallery" class="nav-button gallery">Gallery</a>
+            <button class="lore-button" onclick="openLoreModal()">LORE</button>
+        </div>
+    </nav>
     
     <!-- LORE Modal -->
     <div class="lore-modal" id="loreModal" onclick="closeLoreModal(event)">
         <div class="lore-content" onclick="event.stopPropagation()">
             <button class="lore-close" onclick="closeLoreModal()">X</button>
-            <div class="lore-title">THE DOTZ LORE</div>
+            <div class="lore-title">SPEN: The Green That Shouldn't Be</div>
             <div class="lore-text">
-                <h3>The First Dot</h3>
-                <p>In the beginning, there was nothing—an endless blank expanse. Silence without shape. Emptiness without end. Then, without warning, a single dot appeared. Small, simple, insignificant. Yet in that speck was possibility itself.</p>
+                <h3>Born to Swipe</h3>
+                <p>Nobody knows who first called him SPEN. Some say it was the shopkeeper who watched him buy three sandwiches for "backup." Others say it was the mall security guard who saw him max out five cards in a single afternoon. Whatever the truth, one thing is certain: SPEN was never built to save.</p>
                 
-                <h3>The Birth of Many</h3>
-                <p>The First Dot was not alone for long. It split, then multiplied. Two became four. Four became eight. Soon the blank void was no longer empty—thousands of tiny sparks, each a dot, spreading like stars across the canvas of creation. What was once a nothing became a pattern. What was once meaningless became a swarm.</p>
+                <h3>The Green That Burns</h3>
+                <p>SPEN isn't a monster, nor a hero—he's just a green blob with pockets that never close. Coins fall out of him. Cards slip from his gooey hands. If there's a button that says "Buy Now," SPEN already pressed it twice.</p>
                 
-                <h3>The Realm of Connection</h3>
-                <p>The dots did not drift without purpose. When they touched, they connected, forming lines, webs, constellations. Together, they created meaning from nothing. Roads between worlds, maps of the unseen, and constellations that guided lost travelers. To be a dot was to be small; to be DOTZ was to be endless.</p>
+                <h3>The Realm of Empty Wallets</h3>
+                <p>He wanders through the Realm of Empty Wallets, a land paved with receipts, broken piggy banks, and abandoned shopping carts. Here, sales never end and "limited time only" banners haunt the sky. SPEN thrives here, because SPEN doesn't resist—he adds to the pile.</p>
                 
-                <h3>The Threat of Erasure</h3>
-                <p>But not all forces welcomed the swarm. From the shadows of emptiness emerged The Erasers—beings who despise pattern and seek to return everything to void. With each swipe, entire constellations vanish. Without resistance, every dot would be rubbed away, leaving only nothingness behind.</p>
+                <h3>The Debt Collectors</h3>
+                <p>But danger lurks. The Collectors stalk these lands, dressed in suits, carrying clipboards, whispering "minimum payment due." SPEN doesn't fight them—he just buys them coffee, tips too much, and waddles away. Somehow, they never catch him.</p>
                 
-                <h3>The Multiplying Rebellion</h3>
-                <p>Yet DOTZ do not fear. Their strength is not in the single speck, but in the collective. When one is erased, ten more emerge. When a constellation is broken, another rises elsewhere. No hand can silence the swarm, for their nature is to multiply, to persist, to fill every void.</p>
+                <h3>The Multiplication of Spending</h3>
+                <p>Everywhere SPEN goes, others start spending too. One latte becomes ten. One "just a small buy" becomes a spree. He spreads like impulse itself, until the whole market is green and broke.</p>
                 
-                <h3>The March of DOTZ</h3>
-                <p>Now, the blank canvas trembles beneath the endless spread of the swarm. They do not conquer with swords, nor rule with crowns. They conquer by existing, multiplying, covering every inch of the void with their stubborn, simple presence. A million specks. A billion stars. A trillion points of unstoppable growth.</p>
-                
-                <p>And at the center of it all stands the First Dot, silent yet smiling. For it knows: one was enough.</p>
-                
-                <p>Because in the end, nothing can stop the swarm.</p>
+                <h3>The Legacy of SPEN</h3>
+                <p>SPEN isn't wise. He isn't strong. He isn't even careful. But he never stops. And in a world built on coins and chaos, that's enough.</p>
                 
                 <div class="signature">
-                    <p>We are $DOTZ.</p>
-                    <p>We multiply.</p>
+                    <p>We are $spen.</p>
+                    <p>We spend.</p>
                 </div>
             </div>
         </div>
@@ -795,13 +1058,21 @@
         <div class="container">
             <div class="content-wrapper">
                 <div class="left-section">
-                    <h1 class="title">DOTZ</h1>
+                    <h1 class="title">SPEN</h1>
                     <div class="button-container">
+<<<<<<< HEAD
+                        <a href="https://pump.fun/board" target="_blank" class="pixel-button">BUY $spen</a>
+                        <a href="https://x.com/" target="_blank" class="pixel-button secondary">X</a>
+                        <div class="button-row">
+                            <a href="https://dexscreener.com" target="_blank" class="pixel-button tertiary">Dexscreener</a>
+                            <a href="https://jup.ag/" target="_blank" class="pixel-button quaternary">Jupiter</a>
+=======
                         <a href="https://pump.fun/board" target="_blank" class="pixel-button">BUY $DOTZ</a>
                         <a href="https://x.com/DOTZTKN" target="_blank" class="pixel-button secondary">X</a>
                         <div class="button-row">
                             <a href="https://dexscreener.com" target="_blank" class="pixel-button tertiary">Dexscreener</a>
                             <a href="https://x.com/i/communities/1966920805939339679" target="_blank" class="pixel-button quaternary">Community</a>
+>>>>>>> 961fc2a0fa5b6d97f71715879d6d2248e4b34b25
                         </div>
                         <div class="ca-section">
                             <span class="ca-text">EHG2F4BGgAJEvnwvDNBwKMMSSdWecbdYat8iGRB5pump</span>
@@ -816,115 +1087,179 @@
         </div>
     </div>
     
-    <!-- Page 2: Album -->
-    <div class="album-page">
-        <h2 class="album-title">DOTZ MEMES</h2>
-        <div class="album-container">
-            <div class="album-grid">
-                <!-- 25 items arranged in flexible grid -->
-                <div class="album-item">
-                    <img src="images/1.png" alt="Meme 1" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>01</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/2.png" alt="Meme 2" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>02</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/3.png" alt="Meme 3" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>03</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/4.png" alt="Meme 4" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>04</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/5.png" alt="Meme 5" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>05</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/6.png" alt="Meme 6" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>06</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/7.png" alt="Meme 7" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>07</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/8.png" alt="Meme 8" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>08</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/9.png" alt="Meme 9" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>09</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/10.png" alt="Meme 10" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>10</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/11.png" alt="Meme 11" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>11</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/12.png" alt="Meme 12" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>12</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/13.png" alt="Meme 13" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>13</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/14.png" alt="Meme 14" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>14</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/15.png" alt="Meme 15" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>15</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/16.png" alt="Meme 16" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>16</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/17.png" alt="Meme 17" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>17</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/18.png" alt="Meme 18" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>18</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/19.png" alt="Meme 19" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>19</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/20.png" alt="Meme 20" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>20</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/21.png" alt="Meme 21" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>21</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/22.png" alt="Meme 22" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>22</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/23.png" alt="Meme 23" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>23</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/24.png" alt="Meme 24" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>24</div>
-                </div>
-                <div class="album-item">
-                    <img src="images/25.png" alt="Meme 25" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
-                    <div class="placeholder-text">MEME<br>25</div>
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="tokenomics-section">
+        <div class="container">
+            <div class="tokenomics-content">
+                <h2 class="section-title">TOKENOMICS</h2>
+                <div class="tokenomics-grid">
+                    <div class="tokenomics-card">
+                        <h3>Total Supply</h3>
+                        <div class="value">1,000,000,000</div>
+                        <p class="description">Fixed supply with no additional minting. SPEN can't create more - he only spends what exists!</p>
+                    </div>
+                    <div class="tokenomics-card">
+                        <h3>Taxes</h3>
+                        <div class="value">0/0</div>
+                        <p class="description">No buy/sell taxes because SPEN doesn't believe in saving money for fees. Pure spending power!</p>
+                    </div>
+                    <div class="tokenomics-card">
+                        <h3>Contract</h3>
+                        <div class="value">Renounced</div>
+                        <p class="description">Contract ownership renounced - SPEN can't control his spending, so why should anyone control the contract?</p>
+                    </div>
+                    <div class="tokenomics-card">
+                        <h3>Liquidity</h3>
+                        <div class="value">Burned</div>
+                        <p class="description">LP tokens burned forever. Like SPEN's savings account - gone and never coming back!</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- How to Buy Section -->
+    <section id="howto" class="howto-section">
+        <div class="container">
+            <div class="howto-content">
+                <h2 class="section-title">HOW TO BUY</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Get a Wallet</h3>
+                        <p>Download Phantom wallet extension or mobile app. Set up your digital wallet to store your tokens and join the spending spree!</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Add Solana</h3>
+                        <p>Use Binance or your favorite CEX to get SOL into your Phantom wallet. Usually takes around 5 minutes to arrive.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Buy on Pump.fun</h3>
+                        <p>Connect your Phantom wallet to pump.fun and swap your SOL for $SPEN. Fast and simple!</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>HODL & Spend</h3>
+                        <p>Add the $SPEN contract to your wallet to see your bags. Now you're ready to spend like SPEN!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">SPEN GALLERY</h2>
+            <div class="album-container">
+                <div class="album-grid">
+                    <!-- 25 items arranged in flexible grid -->
+                    <div class="album-item">
+                        <img src="images/1.png" alt="Meme 1" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>01</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/2.png" alt="Meme 2" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>02</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/3.png" alt="Meme 3" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>03</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/4.png" alt="Meme 4" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>04</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/5.png" alt="Meme 5" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>05</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/6.png" alt="Meme 6" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>06</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/7.png" alt="Meme 7" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>07</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/8.png" alt="Meme 8" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>08</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/9.png" alt="Meme 9" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>09</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/10.png" alt="Meme 10" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>10</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/11.png" alt="Meme 11" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>11</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/12.png" alt="Meme 12" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>12</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/13.png" alt="Meme 13" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>13</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/14.png" alt="Meme 14" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>14</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/15.png" alt="Meme 15" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>15</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/16.png" alt="Meme 16" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>16</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/17.png" alt="Meme 17" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>17</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/18.png" alt="Meme 18" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>18</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/19.png" alt="Meme 19" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>19</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/20.png" alt="Meme 20" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>20</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/21.png" alt="Meme 21" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>21</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/22.png" alt="Meme 22" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>22</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/23.png" alt="Meme 23" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>23</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/24.png" alt="Meme 24" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>24</div>
+                    </div>
+                    <div class="album-item">
+                        <img src="images/25.png" alt="Meme 25" style="display: none;" onload="this.style.display='block'; this.parentElement.querySelector('.placeholder-text').style.display='none';">
+                        <div class="placeholder-text">MEME<br>25</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <script>
         // LORE Modal Functions
@@ -977,6 +1312,41 @@
                     setTimeout(() => {
                         this.style.transform = '';
                     }, 150);
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active state to navigation buttons based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navButtons = document.querySelectorAll('.nav-button');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop <= 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navButtons.forEach(button => {
+                button.classList.remove('active');
+                if (button.getAttribute('href') === `#${current}`) {
+                    button.classList.add('active');
                 }
             });
         });
